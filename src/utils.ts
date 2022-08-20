@@ -23,8 +23,8 @@ export const getCucumberQuickObject = (): CucumberQuickConfiguration => {
 			)
 		)['cucumber-quick'];
 	} catch (err) {
-		vscode.window.showErrorMessage('unable to read cucumber-quick configuration', err);
-		throw new Error(err);
+		vscode.window.showErrorMessage('unable to read cucumber-quick configuration', (err as Error).message);
+		throw err;
 	}
 
 	if (quickConfiguration) {

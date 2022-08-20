@@ -37,7 +37,9 @@ export const startProcess = (command: string) => {
 
 // Tries to kill the active process that is running a command.
 export const killActiveProcess = (commandOutput: vscode.OutputChannel) => {
-	if (!process) return;
+	if (!process) {
+		return;
+	}
 
 	commandOutput.appendLine(`> Killing PID ${process.pid}...`);
 	treeKill(process.pid, 'SIGTERM', (err: any) => {
@@ -57,7 +59,7 @@ const printOutputDelegate = (data: any) => {
 
 // runs the shell command in output window
 const runShellCommand = (cmd: string, cwd: string | undefined) => {
-	return new Promise((accept, reject) => {
+	return new Promise<void>((accept, reject) => {
 		var opts: any = {};
 		if (vscode.workspace) {
 			opts.cwd = cwd;
